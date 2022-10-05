@@ -1,5 +1,5 @@
 let colorPaletteArray = [];
-if (localStorage.getItem('colorPalette') != null){ // Testa se existe uma paleta de cores armazenada
+if (localStorage.getItem('colorPalette') != null) { // Testa se existe uma paleta de cores armazenada
   colorPaletteArray = JSON.parse(localStorage.getItem('colorPalette'));
 }
 
@@ -9,12 +9,12 @@ for (let index = 1; index <= 4; index++) {
   colorDiv.classList.add('color');
   if (index == 1) { //Sempre preenche o primeiro com black;
     colorDiv.style.backgroundColor = 'rgb(00, 00, 00)';
-  } else if(localStorage.getItem('colorPalette') == null){ // Se não tem nada armazenado vai gerar novas cores
+  } else if (localStorage.getItem('colorPalette') == null) { // Se não tem nada armazenado vai gerar novas cores
     while (colorDiv.style.backgroundColor == '') {
       colorDiv.style.backgroundColor = randomHex(); // Atribui uma cor aleatória
     }
     colorPaletteArray.push(colorDiv.style.backgroundColor); //Grava num array as novas cores
-  }else{ // Usa as cores que, por ventura, já estão armazenadas
+  } else { // Usa as cores que, por ventura, já estão armazenadas
     // console.log(index, colorPaletteArray);
     colorDiv.style.backgroundColor = colorPaletteArray[index - 2];
   }
@@ -28,6 +28,30 @@ btnRandom.id = 'button-random-color';
 btnRandom.innerText = 'Cores aleatórias'
 myColorPalette.appendChild(btnRandom);
 btnRandom.addEventListener('click', randomColors);
+
+let col = 5;
+let line = 5;
+
+let boardSection = document.getElementById('pixel-board');
+let divLine = document.createElement('div');
+divLine.id = 'div-line';
+divLine.style.display = 'block'
+boardSection.appendChild(divLine);
+
+for (let index = 1; index <= line; index++) {
+  for (let index = 1; index <= col; index++) {
+    let divPixel = document.createElement('div');
+    divPixel.classList.add('pixel');
+    divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
+    divLine.appendChild(divPixel);
+  }
+}
+
+
+
+
+
+
 
 function randomColors() {
   let colorDivs = document.getElementsByClassName('color');
