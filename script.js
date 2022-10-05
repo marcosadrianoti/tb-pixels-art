@@ -29,6 +29,9 @@ btnRandom.innerText = 'Cores aleatórias'
 myColorPalette.appendChild(btnRandom);
 btnRandom.addEventListener('click', randomColors);
 
+let sectionColorPalette = document.querySelector('#color-palette');
+
+
 let col = 5;
 let line = 5;
 
@@ -36,7 +39,8 @@ let boardSection = document.getElementById('pixel-board');
 let btnClear = document.createElement('button'); //Cria botão
 btnClear.id = 'clear-board';
 btnClear.innerText = 'Limpar'
-boardSection.appendChild(btnClear);
+sectionColorPalette.insertAdjacentElement('afterend', btnClear);
+
 btnClear.addEventListener('click', clearBoard);
 let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
