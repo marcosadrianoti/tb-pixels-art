@@ -60,7 +60,6 @@ function choseColor(event) {
     oldSelectedColor = document.querySelector('.selected')
     oldSelectedColor.classList.toggle('selected');
     event.target.classList.toggle('selected');
-  console.log(paletteColorDivs);
   }
 }
 
