@@ -3,7 +3,7 @@ if (localStorage.getItem('colorPalette') != null) { // Testa se existe uma palet
   colorPaletteArray = JSON.parse(localStorage.getItem('colorPalette'));
 }
 
-var selectedColor = 'rgb(00, 00, 00)'
+let selectedColor = 'rgb(00, 00, 00)'
 let myColorPalette = document.getElementById('color-palette');
 for (let index = 1; index <= 4; index++) {
   let colorDiv = document.createElement('div');
@@ -33,7 +33,12 @@ let col = 5;
 let line = 5;
 
 let boardSection = document.getElementById('pixel-board');
-let divLine = document.createElement('div');
+let btnClear = document.createElement('button'); //Cria botão
+btnClear.id = 'clear-board';
+btnClear.innerText = 'Limpar'
+boardSection.appendChild(btnClear);
+btnClear.addEventListener('click', clearBoard);
+let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
 divLine.style.display = 'block'
 boardSection.appendChild(divLine);
@@ -55,8 +60,15 @@ myColorPalette.addEventListener('click', choseColor);
 divLine.addEventListener('click', apllyColor);
 
 let oldSelectedColor = null;
+let allPixels = document.querySelectorAll('.pixel');
+// console.log(allPixels);
+function clearBoard() {
+  for (const pixel of allPixels) {
+    pixel.style.backgroundColor = 'rgb(255, 255, 255)';
+  }
+}
 
-function choseColor(event, selectedColor) {
+function choseColor(event) {
   let atualColor = event.target;
   if (atualColor !== btnRandom) {
     oldSelectedColor = document.querySelector('.selected')
