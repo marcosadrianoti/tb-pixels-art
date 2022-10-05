@@ -3,12 +3,13 @@ if (localStorage.getItem('colorPalette') != null) { // Testa se existe uma palet
   colorPaletteArray = JSON.parse(localStorage.getItem('colorPalette'));
 }
 
+let selectedColor = 'rgb(00, 00, 00)'
 let myColorPalette = document.getElementById('color-palette');
 for (let index = 1; index <= 4; index++) {
   let colorDiv = document.createElement('div');
   colorDiv.classList.add('color');
   if (index == 1) { //Sempre preenche o primeiro com black;
-    colorDiv.style.backgroundColor = 'rgb(00, 00, 00)';
+    colorDiv.style.backgroundColor = selectedColor;
     colorDiv.classList.add('selected');
   } else if (localStorage.getItem('colorPalette') == null) { // Se não tem nada armazenado vai gerar novas cores
     while (colorDiv.style.backgroundColor == '') {
@@ -55,11 +56,17 @@ let paletteColorDivs = document.getElementsByClassName('color');
 myColorPalette.addEventListener('click', choseColor);
 
 let oldSelectedColor = null;
-function choseColor(event) {
-  if (event.target !== btnRandom){
+// console.log(selectedColor, 'fora');
+
+function choseColor(event, selectedColor) {
+  let atualColor = event.target;
+  if (atualColor !== btnRandom){
     oldSelectedColor = document.querySelector('.selected')
     oldSelectedColor.classList.toggle('selected');
-    event.target.classList.toggle('selected');
+    atualColor.classList.toggle('selected');
+    selectedColor = atualColor.style.backgroundColor;
+    console.log(selectedColor, 'dentro');
+    
   }
 }
 
