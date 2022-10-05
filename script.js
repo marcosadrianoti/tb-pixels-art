@@ -16,12 +16,10 @@ for (let index = 1; index <= 4; index++) {
     }
     colorPaletteArray.push(colorDiv.style.backgroundColor); //Grava num array as novas cores
   } else { // Usa as cores que, por ventura, já estão armazenadas
-    // console.log(index, colorPaletteArray);
     colorDiv.style.backgroundColor = colorPaletteArray[index - 2];
   }
   myColorPalette.appendChild(colorDiv);
 }
-// console.log(colorPalette);
 storageColorPalette(colorPaletteArray);
 
 let btnRandom = document.createElement('button');
@@ -52,12 +50,6 @@ for (let index = 1; index <= line; index++) {
   }
 }
 
-
-
-
-
-
-
 function randomColors() {
   let colorDivs = document.getElementsByClassName('color');
   colorPaletteArray = [];
@@ -65,7 +57,6 @@ function randomColors() {
     colorDivs[index].style.backgroundColor = randomHex();
     colorPaletteArray.push(colorDivs[index].style.backgroundColor); //Grava num array as novas cores
   }
-  // console.log(colorPalette);
   storageColorPalette(colorPaletteArray);
 }
 
@@ -75,16 +66,4 @@ function randomHex() {
 
 function storageColorPalette(arrayColors) {
   localStorage.setItem('colorPalette', JSON.stringify(arrayColors));
-  // console.log(arrayColors);
 }
-
-  // let listColors = document.querySelectorAll('.color')
-  // let conta = 0;
-  // for (let index = 0; index <= 3; index++ ) {
-  //     for (const i of listColors) {
-  //       if (listColors[index].style.backgroundColor === i.style.backgroundColor){
-  //         conta += 1;
-  //       }
-  // }
-  // conta = 0;
-  // }
