@@ -3,7 +3,7 @@ if (localStorage.getItem('colorPalette') != null) { // Testa se existe uma palet
   colorPaletteArray = JSON.parse(localStorage.getItem('colorPalette'));
 }
 
-let selectedColor = 'rgb(00, 00, 00)'
+var selectedColor = 'rgb(00, 00, 00)'
 let myColorPalette = document.getElementById('color-palette');
 for (let index = 1; index <= 4; index++) {
   let colorDiv = document.createElement('div');
@@ -43,37 +43,32 @@ for (let index = 1; index <= line; index++) {
     let divPixel = document.createElement('div');
     divPixel.classList.add('pixel');
     divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
-    divPixel.style.height= '40px';
-    divPixel.style.width= '40px';
-    divPixel.style.border= '1px solid black';
+    divPixel.style.height = '40px';
+    divPixel.style.width = '40px';
+    divPixel.style.border = '1px solid black';
 
     divLine.appendChild(divPixel);
   }
 }
 
-let paletteColorDivs = document.getElementsByClassName('color');
-// console.log(paletteColorDivs);
 myColorPalette.addEventListener('click', choseColor);
+divLine.addEventListener('click', apllyColor);
 
 let oldSelectedColor = null;
-// console.log(selectedColor, 'fora');
 
 function choseColor(event, selectedColor) {
   let atualColor = event.target;
-  if (atualColor !== btnRandom){
+  if (atualColor !== btnRandom) {
     oldSelectedColor = document.querySelector('.selected')
     oldSelectedColor.classList.toggle('selected');
     atualColor.classList.toggle('selected');
-    selectedColor = atualColor.style.backgroundColor;
-    console.log(selectedColor, 'dentro');
-    
   }
 }
-
-
-
-
-
+function apllyColor(event) {
+  let pixelAtual = event.target;
+  selectedColor = document.querySelector('.selected').style.backgroundColor;
+  pixelAtual.style.backgroundColor = selectedColor;
+}
 function randomColors() {
   let colorDivs = document.getElementsByClassName('color');
   colorPaletteArray = [];
@@ -83,11 +78,9 @@ function randomColors() {
   }
   storageColorPalette(colorPaletteArray);
 }
-
 function randomHex() {
   return '#' + parseInt(Math.random() * 100) + parseInt(Math.random() * 100) + parseInt(Math.random() * 100);
 }
-
 function storageColorPalette(arrayColors) {
   localStorage.setItem('colorPalette', JSON.stringify(arrayColors));
 }
