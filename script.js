@@ -2,7 +2,6 @@ let colorPaletteArray = [];
 if (localStorage.getItem('colorPalette') != null) { // Testa se existe uma paleta de cores armazenada
   colorPaletteArray = JSON.parse(localStorage.getItem('colorPalette'));
 }
-
 let selectedColor = 'rgb(00, 00, 00)'
 let myColorPalette = document.getElementById('color-palette');
 for (let index = 1; index <= 4; index++) {
@@ -29,19 +28,16 @@ btnRandom.innerText = 'Cores aleatórias'
 myColorPalette.appendChild(btnRandom);
 btnRandom.addEventListener('click', randomColors);
 
-let sectionColorPalette = document.querySelector('#color-palette');
-
-
 let col = 5;
 let line = 5;
 
-let boardSection = document.getElementById('pixel-board');
+let sectionColorPalette = document.querySelector('#color-palette');
 let btnClear = document.createElement('button'); //Cria botão
 btnClear.id = 'clear-board';
 btnClear.innerText = 'Limpar'
 sectionColorPalette.insertAdjacentElement('afterend', btnClear);
-
 btnClear.addEventListener('click', clearBoard);
+let boardSection = document.getElementById('pixel-board');
 let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
 divLine.style.display = 'block'
@@ -59,19 +55,25 @@ for (let index = 1; index <= line; index++) {
     divLine.appendChild(divPixel);
   }
 }
-
+let paintedBoard = {};
+let allPixels = document.querySelectorAll('.pixel');
+if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado então ele será carregado
+  paintedBoard = JSON.parse(localStorage.getItem('pixelBoard'))
+  for (let index = 0; index < allPixels.length; index++) {
+    allPixels[index].style.backgroundColor = paintedBoard[index];
+  }
+  console.log(allPixels);
+}
 myColorPalette.addEventListener('click', choseColor);
 divLine.addEventListener('click', apllyColor);
 
 let oldSelectedColor = null;
-let allPixels = document.querySelectorAll('.pixel');
-// console.log(allPixels);
 function clearBoard() {
   for (const pixel of allPixels) {
     pixel.style.backgroundColor = 'rgb(255, 255, 255)';
   }
+  saveBoard();
 }
-
 function choseColor(event) {
   let atualColor = event.target;
   if (atualColor !== btnRandom) {
@@ -82,8 +84,17 @@ function choseColor(event) {
 }
 function apllyColor(event) {
   let pixelAtual = event.target;
+  console.log(pixelAtual);
   selectedColor = document.querySelector('.selected').style.backgroundColor;
   pixelAtual.style.backgroundColor = selectedColor;
+  saveBoard();
+}
+function saveBoard() {
+  paintedBoard = {};
+  for (let index = 0; index < allPixels.length; index++) {
+    paintedBoard[index] = allPixels[index].style.backgroundColor;
+  }
+  localStorage.setItem('pixelBoard', JSON.stringify(paintedBoard));
 }
 function randomColors() {
   let colorDivs = document.getElementsByClassName('color');
