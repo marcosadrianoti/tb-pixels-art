@@ -32,11 +32,26 @@ let col = 5;
 let line = 5;
 
 let sectionColorPalette = document.querySelector('#color-palette');
-let btnClear = document.createElement('button'); //Cria botão
+let btnClear = document.createElement('button'); //Cria botão para limpar
 btnClear.id = 'clear-board';
 btnClear.innerText = 'Limpar'
 sectionColorPalette.insertAdjacentElement('afterend', btnClear);
 btnClear.addEventListener('click', clearBoard);
+
+let btnInputSize = document.createElement('button'); //Cria botão para o tamanho
+btnInputSize.id = 'generate-board';
+btnInputSize.innerText = 'VQV'
+sectionColorPalette.insertAdjacentElement('afterend', btnInputSize);
+btnInputSize.addEventListener('click', sizeBoard);
+
+let inputSize = document.createElement('input'); //Cria input para o tamanho
+inputSize.id = 'board-size';
+inputSize.type = "number";
+inputSize.min = 1;
+inputSize.style.width = '40px'
+sectionColorPalette.insertAdjacentElement('afterend', inputSize);
+
+
 let boardSection = document.getElementById('pixel-board');
 let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
@@ -65,6 +80,32 @@ if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado 
 }
 myColorPalette.addEventListener('click', choseColor);
 divLine.addEventListener('click', apllyColor);
+
+function sizeBoard() {
+  if (inputSize.value == '' || inputSize.value <= 0) {
+    alert('Board inválido!')
+  } else {
+    for (const iterator of allPixels) {
+      iterator.parentNode.removeChild(iterator);
+    }
+    for (let index = 1; index <= inputSize.value; index++) {
+      for (let index = 1; index <= inputSize.value; index++) {
+        let divPixel = document.createElement('div');
+        divPixel.classList.add('pixel');
+        divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
+        divPixel.style.height = '40px';
+        divPixel.style.width = '40px';
+        divPixel.style.border = '1px solid black';
+
+        divLine.appendChild(divPixel);
+      }
+    }
+    divLine.style.width = 40 * inputSize.value + 20 + 'px';
+    allPixels = document.querySelectorAll('.pixel');
+    clearBoard();
+    // console.log('entrou', inputSize.value);
+  }
+}
 
 let oldSelectedColor = null;
 function clearBoard() {
