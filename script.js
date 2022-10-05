@@ -62,7 +62,6 @@ if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado 
   for (let index = 0; index < allPixels.length; index++) {
     allPixels[index].style.backgroundColor = paintedBoard[index];
   }
-  console.log(allPixels);
 }
 myColorPalette.addEventListener('click', choseColor);
 divLine.addEventListener('click', apllyColor);
@@ -84,7 +83,6 @@ function choseColor(event) {
 }
 function apllyColor(event) {
   let pixelAtual = event.target;
-  console.log(pixelAtual);
   selectedColor = document.querySelector('.selected').style.backgroundColor;
   pixelAtual.style.backgroundColor = selectedColor;
   saveBoard();
