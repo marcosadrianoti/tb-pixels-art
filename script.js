@@ -43,6 +43,10 @@ for (let index = 1; index <= line; index++) {
     let divPixel = document.createElement('div');
     divPixel.classList.add('pixel');
     divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
+    divPixel.style.height= '40px';
+    divPixel.style.width= '40px';
+    divPixel.style.border= '1px solid black';
+
     divLine.appendChild(divPixel);
   }
 }
