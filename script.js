@@ -9,6 +9,7 @@ for (let index = 1; index <= 4; index++) {
   colorDiv.classList.add('color');
   if (index == 1) { //Sempre preenche o primeiro com black;
     colorDiv.style.backgroundColor = 'rgb(00, 00, 00)';
+    colorDiv.classList.add('selected');
   } else if (localStorage.getItem('colorPalette') == null) { // Se não tem nada armazenado vai gerar novas cores
     while (colorDiv.style.backgroundColor == '') {
       colorDiv.style.backgroundColor = randomHex(); // Atribui uma cor aleatória
