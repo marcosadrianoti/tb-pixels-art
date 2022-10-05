@@ -50,6 +50,24 @@ for (let index = 1; index <= line; index++) {
   }
 }
 
+let paletteColorDivs = document.getElementsByClassName('color');
+// console.log(paletteColorDivs);
+myColorPalette.addEventListener('click', choseColor);
+
+let oldSelectedColor = null;
+function choseColor(event) {
+  if (event.target !== btnRandom){
+    oldSelectedColor = document.querySelector('.selected')
+    oldSelectedColor.classList.toggle('selected');
+    event.target.classList.toggle('selected');
+  console.log(paletteColorDivs);
+  }
+}
+
+
+
+
+
 function randomColors() {
   let colorDivs = document.getElementsByClassName('color');
   colorPaletteArray = [];
