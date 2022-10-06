@@ -48,6 +48,7 @@ let inputSize = document.createElement('input'); //Cria input para o tamanho
 inputSize.id = 'board-size';
 inputSize.type = "number";
 inputSize.min = 1;
+inputSize.max = 50;
 inputSize.style.width = '40px'
 sectionColorPalette.insertAdjacentElement('afterend', inputSize);
 
@@ -85,11 +86,19 @@ function sizeBoard() {
   if (inputSize.value == '' || inputSize.value <= 0) {
     alert('Board inválido!')
   } else {
+    let sizeBoard = inputSize.value;
+   
+    if(inputSize.value < 5){
+      sizeBoard = 5;
+    }
+    if(inputSize.value > 50){
+      sizeBoard = 50;
+    }
     for (const iterator of allPixels) {
       iterator.parentNode.removeChild(iterator);
     }
-    for (let index = 1; index <= inputSize.value; index++) {
-      for (let index = 1; index <= inputSize.value; index++) {
+    for (let index = 1; index <= sizeBoard; index++) {
+      for (let index = 1; index <= sizeBoard; index++) {
         let divPixel = document.createElement('div');
         divPixel.classList.add('pixel');
         divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
@@ -100,7 +109,7 @@ function sizeBoard() {
         divLine.appendChild(divPixel);
       }
     }
-    divLine.style.width = 40 * inputSize.value + 20 + 'px';
+    divLine.style.width = 42 * sizeBoard + 25 + 'px';
     allPixels = document.querySelectorAll('.pixel');
     clearBoard();
     // console.log('entrou', inputSize.value);
