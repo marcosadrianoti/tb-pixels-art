@@ -56,19 +56,7 @@ let boardSize = localStorage.getItem('boardSize');
 if (boardSize == null) {
   boardSize = 5;
 }
-for (let index = 1; index <= boardSize; index++) {
-  for (let index = 1; index <= boardSize; index++) {
-    let divPixel = document.createElement('div');
-    divPixel.classList.add('pixel');
-    divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
-    divPixel.style.height = '40px';
-    divPixel.style.width = '40px';
-    divPixel.style.border = '1px solid black';
-
-    divLine.appendChild(divPixel);
-  }
-}
-divLine.style.width = 42 * boardSize + 'px';
+appendPixels(boardSize);
 let paintedBoard = {};
 let allPixels = document.querySelectorAll('.pixel');
 if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado então ele será carregado
@@ -95,28 +83,26 @@ function sizeBoard() {
     for (const iterator of allPixels) {
       iterator.parentNode.removeChild(iterator);
     }
-    for (let index = 1; index <= boardSize; index++) {
-      for (let index = 1; index <= boardSize; index++) {
-        let divPixel = document.createElement('div');
-        divPixel.classList.add('pixel');
-        divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
-        divPixel.style.height = '40px';
-        divPixel.style.width = '40px';
-        divPixel.style.border = '1px solid black';
-
-        divLine.appendChild(divPixel);
-      }
-    }
-    divLine.style.width = 42 * boardSize + 'px';
+    appendPixels(boardSize);
     localStorage.setItem('boardSize', boardSize);
     allPixels = document.querySelectorAll('.pixel');
     clearBoard();
   }
 }
-
-
-
-
+function appendPixels(boardSize) {
+  for (let index = 1; index <= boardSize; index++) {
+    for (let index = 1; index <= boardSize; index++) {
+      let divPixel = document.createElement('div');
+      divPixel.classList.add('pixel');
+      divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
+      divPixel.style.height = '40px';
+      divPixel.style.width = '40px';
+      divPixel.style.border = '1px solid black';
+      divLine.appendChild(divPixel);
+    }
+  }
+  divLine.style.width = 42 * boardSize + 'px';
+}
 let oldSelectedColor = null;
 function clearBoard() {
   for (const pixel of allPixels) {
