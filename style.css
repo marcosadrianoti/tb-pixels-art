@@ -1,11 +1,38 @@
-.color, .pixel {
+body {
+  background-color: rgb(228, 224, 224);
+}
+
+main, h1 {
+  padding-left: 10px;
+}
+
+.color {
   display: inline-block;
   height: 40px;
   width: 40px;
   border: 1px solid black;
 }
 
-/* div {
-  width: 210px;
-  border: 1px solid rgb(202, 61, 61);
-} */
+.pixel {
+  display: inline-block;
+}
+
+#div-line {
+  font-size: 0;
+  margin-top: 10px;
+  border: 5px solid gray;
+}
+
+#button-random-color {
+  position: relative;
+  top: -15px;
+  margin-left: 15px;
+}
+
+#clear-board {
+  margin-left: 15px;
+}
+
+#generate-board {
+  margin-left: 5px;
+}

@@ -49,7 +49,7 @@ sectionColorPalette.insertAdjacentElement('afterend', inputSize);
 let boardSection = document.getElementById('pixel-board');
 let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
-divLine.style.display = 'block'
+divLine.style.display = 'inline-block'
 boardSection.appendChild(divLine);
 
 let boardSize = localStorage.getItem('boardSize');
@@ -68,7 +68,7 @@ for (let index = 1; index <= boardSize; index++) {
     divLine.appendChild(divPixel);
   }
 }
-divLine.style.width = 42 * boardSize + 25 + 'px';
+divLine.style.width = 42 * boardSize + 'px';
 let paintedBoard = {};
 let allPixels = document.querySelectorAll('.pixel');
 if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado então ele será carregado
@@ -107,12 +107,16 @@ function sizeBoard() {
         divLine.appendChild(divPixel);
       }
     }
-    divLine.style.width = 42 * boardSize + 25 + 'px';
+    divLine.style.width = 42 * boardSize + 'px';
     localStorage.setItem('boardSize', boardSize);
     allPixels = document.querySelectorAll('.pixel');
     clearBoard();
   }
 }
+
+
+
+
 let oldSelectedColor = null;
 function clearBoard() {
   for (const pixel of allPixels) {
