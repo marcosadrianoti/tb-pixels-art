@@ -28,22 +28,17 @@ btnRandom.innerText = 'Cores aleatórias'
 myColorPalette.appendChild(btnRandom);
 btnRandom.addEventListener('click', randomColors);
 
-let col = 5;
-let line = 5;
-
 let sectionColorPalette = document.querySelector('#color-palette');
 let btnClear = document.createElement('button'); //Cria botão para limpar
 btnClear.id = 'clear-board';
 btnClear.innerText = 'Limpar'
 sectionColorPalette.insertAdjacentElement('afterend', btnClear);
 btnClear.addEventListener('click', clearBoard);
-
 let btnInputSize = document.createElement('button'); //Cria botão para o tamanho
 btnInputSize.id = 'generate-board';
 btnInputSize.innerText = 'VQV'
 sectionColorPalette.insertAdjacentElement('afterend', btnInputSize);
 btnInputSize.addEventListener('click', sizeBoard);
-
 let inputSize = document.createElement('input'); //Cria input para o tamanho
 inputSize.id = 'board-size';
 inputSize.type = "number";
@@ -51,16 +46,18 @@ inputSize.min = 1;
 inputSize.max = 50;
 inputSize.style.width = '40px'
 sectionColorPalette.insertAdjacentElement('afterend', inputSize);
-
-
 let boardSection = document.getElementById('pixel-board');
 let divLine = document.createElement('div'); //Cria div para receber pixels
 divLine.id = 'div-line';
 divLine.style.display = 'block'
 boardSection.appendChild(divLine);
 
-for (let index = 1; index <= line; index++) {
-  for (let index = 1; index <= col; index++) {
+let boardSize = localStorage.getItem('boardSize');
+if (boardSize == null) {
+  boardSize = 5;
+}
+for (let index = 1; index <= boardSize; index++) {
+  for (let index = 1; index <= boardSize; index++) {
     let divPixel = document.createElement('div');
     divPixel.classList.add('pixel');
     divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
@@ -71,6 +68,7 @@ for (let index = 1; index <= line; index++) {
     divLine.appendChild(divPixel);
   }
 }
+divLine.style.width = 42 * boardSize + 25 + 'px';
 let paintedBoard = {};
 let allPixels = document.querySelectorAll('.pixel');
 if (localStorage.getItem('pixelBoard') !== null) { // Se tem um desenho gravado então ele será carregado
@@ -86,19 +84,19 @@ function sizeBoard() {
   if (inputSize.value == '' || inputSize.value <= 0) {
     alert('Board inválido!')
   } else {
-    let sizeBoard = inputSize.value;
-   
-    if(inputSize.value < 5){
-      sizeBoard = 5;
+    let boardSize = inputSize.value;
+
+    if (inputSize.value < 5) {
+      boardSize = 5;
     }
-    if(inputSize.value > 50){
-      sizeBoard = 50;
+    if (inputSize.value > 50) {
+      boardSize = 50;
     }
     for (const iterator of allPixels) {
       iterator.parentNode.removeChild(iterator);
     }
-    for (let index = 1; index <= sizeBoard; index++) {
-      for (let index = 1; index <= sizeBoard; index++) {
+    for (let index = 1; index <= boardSize; index++) {
+      for (let index = 1; index <= boardSize; index++) {
         let divPixel = document.createElement('div');
         divPixel.classList.add('pixel');
         divPixel.style.backgroundColor = 'rgb(255, 255, 255)'
@@ -109,13 +107,12 @@ function sizeBoard() {
         divLine.appendChild(divPixel);
       }
     }
-    divLine.style.width = 42 * sizeBoard + 25 + 'px';
+    divLine.style.width = 42 * boardSize + 25 + 'px';
+    localStorage.setItem('boardSize', boardSize);
     allPixels = document.querySelectorAll('.pixel');
     clearBoard();
-    // console.log('entrou', inputSize.value);
   }
 }
-
 let oldSelectedColor = null;
 function clearBoard() {
   for (const pixel of allPixels) {
