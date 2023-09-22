@@ -40,23 +40,13 @@ cd meu-diretorio
 Clone o projeto com o comando `git clone`:
 
 ```bash
-git clone git@github.com:marcosadrianoti/tb-solar-system.git
+git clone git@github.com:marcosadrianoti/tb-pixels-art.git
 ```
 
 Acesse o diretório do projeto com o comando `cd`:
 
 ```bash
-cd tb-solar-system
+cd tb-pixels-art
 ```
 
-Instale as dependencias do projeto com o comando `npm install`:
-
-```bash
-npm install
-```
-
-Execute o projeto com os comandos `npm start`:
-
-```bash
-npm start
-```
+Para rodar o projeto em sua máquina, simplesmente abra o arquivo `index.html` no seu navegador preferido.
