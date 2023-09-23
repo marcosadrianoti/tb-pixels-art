@@ -4,7 +4,7 @@ Projeto desenvolvido por mim durante o curso de Desenvolvimento Web na Trybe. Di
 <details>
 <summary><strong> Objetivos do projeto:</strong></summary>
 
-  * implementar um editor de arte com pixels em que a pessoa usuária poderá escolher uma cor em uma paleta de cores e pintar o que quiser em um quadro branco 🎨
+  * Implementar um editor de arte com pixels em que a pessoa usuária poderá escolher uma cor em uma paleta de cores e pintar o que quiser em um quadro branco 🎨
   * Verificar se eu era capaz de implementar o projeto usando JavaScript, CSS e HTML.
 </details>
 <details>
